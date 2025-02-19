@@ -6,8 +6,16 @@ public class Vehicle {
 
     private Type type;
 
-    public Vehicle(Type type) {
+    // false = unoccupied, true = occupied
+    private boolean[] seats;
+
+    public Vehicle(Type type, int maxSeats) {
         this.type = type;
+
+        this.seats = new boolean[maxSeats];
+        for (int i = 0; i < maxSeats; i++) {
+            this.seats[i] = false;
+        }
     }
 
     public String GetVehicleType() {
@@ -16,5 +24,13 @@ public class Vehicle {
             case CAR: return "Car";
             default: return "None";
         }
+    }
+
+    public int GetNumOccupiedSeats() {
+        int result = 0;
+        for (int i = 0; i < this.seats.length; i++) {
+            if (this.seats[i]) result++;
+        }
+        return result;
     }
 }
